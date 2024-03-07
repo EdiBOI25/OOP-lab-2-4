@@ -6,8 +6,8 @@
 #include <stdlib.h> // pt alocare dinamica
 #include <stdio.h>
 
-void TestAll() {
-	Expense* e1 = ConstructExpense(12, 300, "mancare");
+void test_all() {
+	Expense* e1 = construct_expense(12, 300, "mancare");
 	assert(e1->day == 12);
 	assert(e1->amount == 300);
 	assert(strcmp(e1->type, "mancare") == 0);

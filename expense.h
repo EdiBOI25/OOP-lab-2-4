@@ -9,9 +9,10 @@ typedef struct{
 	char* type;
 } Expense;
 
+
 // Expense "class" constructor
 //	day: int
 //	amount: int
 //	type: string (char[])
 //	returns struct Expense
-Expense* ConstructExpense(int day, int amount, char* type);
+Expense* construct_expense(int day, int amount, char* type);

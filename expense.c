@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-Expense* ConstructExpense(int day, int amount, char* type) {
+Expense* construct_expense(int day, int amount, char* type) {
 	Expense* e = malloc(sizeof(Expense));
 	if (e == NULL) {
 		return NULL;
