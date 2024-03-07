@@ -141,10 +141,12 @@
   <ItemGroup>
     <ClCompile Include="expense.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="repository.c" />
     <ClCompile Include="tests.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="expense.h" />
+    <ClInclude Include="repository.h" />
     <ClInclude Include="tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

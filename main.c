@@ -6,10 +6,8 @@
 
 int main() {
 	test_all();
-	Expense* e1 = construct_expense(12, 300, "mancare");
-	printf("%s\n", e1->type);
-	free(e1->type);
-	free(e1);
+	Expense* e = construct_expense(12, 300, "mancare");
+	destruct_expense(e);
 	
 
 	return 0;
