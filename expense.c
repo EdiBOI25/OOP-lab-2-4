@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 Expense* construct_expense(int day, int amount, char* type) {
-	Expense* e = malloc(sizeof(Expense));
+	Expense* e = (Expense*)malloc(sizeof(Expense));
 	e->day = day;
 	e->amount = amount;
 	e->type = malloc(strlen(type) + 1);
@@ -13,11 +13,12 @@ Expense* construct_expense(int day, int amount, char* type) {
 }
 
 void destruct_expense(Expense *e) {
-	printf("expense.c: destructing expense with amount %d\n", e->amount);
+	print_expense(e);
+	//printf("expense.c: destructing expense with amount %d\n", e->amount);
 	free(e->type);
-	printf("expense.c: destructed type for amount %d\n", e->amount);
+	//printf("expense.c: destructed type for amount %d\n", e->amount);
 	free(e);
-	printf("expense.c: destructed expense\n");
+	//printf("expense.c: destructed expense\n");
 }
 
 void print_expense(Expense* e) {

@@ -1,9 +1,9 @@
-#include "repository.h"
+#include "repository.h" 
 #include <stdlib.h>
 #include <stdio.h>
 
 Repository* construct_repository() {
-    Repository* repo = malloc(sizeof(Repository));
+    Repository* repo = (Repository*)malloc(sizeof(Repository));
     repo->expenses = malloc(1 * sizeof(Expense));
     repo->length = 0;
     repo->capacity = 1;
@@ -11,7 +11,7 @@ Repository* construct_repository() {
 }
 
 void destruct_repository(Repository* repo) {
-	for (int i = 10; i >= 0; i--) {
+	for (int i = repo->length - 1; i >= 0; i--) {
         printf("repository.c: destructing expense %d\n", i);
         destruct_expense(&repo->expenses[i]);
         printf("repository.c: destructed expense %d\n", i);
@@ -41,5 +41,5 @@ void resize(Repository* repo) {
 }
 
 Expense* get_expense(Repository* repo, int position) {
-	return &repo->expenses[position];
+	return &(repo->expenses[position]);
 }
