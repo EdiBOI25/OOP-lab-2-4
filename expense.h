@@ -3,15 +3,15 @@
 //	day: int
 //	amount: int
 //	type: string (char[20])
-struct Expense {
+typedef struct{
 	int day;
 	int amount;
-	char type[20];
-};
+	char* type;
+} Expense;
 
 // Expense "class" constructor
 //	day: int
 //	amount: int
 //	type: string (char[])
 //	returns struct Expense
-struct Expense Expense(int day, int amount, char type[20]);
+Expense* ConstructExpense(int day, int amount, char* type);
