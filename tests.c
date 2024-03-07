@@ -7,9 +7,9 @@
 #include <stdio.h>
 
 void TestAll() {
-	//Expense* e1 = ConstructExpense(12, 300, "mancare");
-	//assert(e1->day == 12);
-	//assert(e1->amount == 300);
-	//assert(strcmp(e1->type, "mancare") == 0);
+	Expense* e1 = ConstructExpense(12, 300, "mancare");
+	assert(e1->day == 12);
+	assert(e1->amount == 300);
+	assert(strcmp(e1->type, "mancare") == 0);
 	printf("Tests passed\n");
 }

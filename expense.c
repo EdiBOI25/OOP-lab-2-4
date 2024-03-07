@@ -1,5 +1,7 @@
 #include "expense.h"
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 Expense* ConstructExpense(int day, int amount, char* type) {
 	Expense* e = malloc(sizeof(Expense));
@@ -13,5 +15,5 @@ Expense* ConstructExpense(int day, int amount, char* type) {
 		return NULL;
 	}
 	strcpy(e->type, type);
-	return NULL;
+	return e;
 }
