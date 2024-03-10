@@ -10,11 +10,11 @@
 
 void test_all() {
 	//// test expense
-	//Expense* e1 = construct_expense(12, 300, "mancare");
-	//assert(e1->day == 12);
-	//assert(e1->amount == 300);
-	//assert(strcmp(e1->type, "mancare") == 0);
-	//destruct_expense(e1);
+	Expense* e1 = construct_expense(12, 300, "mancare");
+	assert(e1->day == 12);
+	assert(e1->amount == 300);
+	assert(strcmp(e1->type, "mancare") == 0);
+	destruct_expense(e1);
 
 	// test repository
 	Repository* repo = construct_repository();
@@ -22,10 +22,10 @@ void test_all() {
 		Expense* e = construct_expense(i, i * 100, "mancare");
 		add_expense(repo, e);
 	}
-	/*assert(repo->length == 10);
+	assert(repo->length == 10);
 	assert(repo->capacity == 16);
 	assert(get_expense(repo, 3)->day == 3);
-	assert(get_expense(repo, 7)->amount == 700);*/
+	assert(get_expense(repo, 7)->amount == 700);
 
 	destruct_repository(repo);
 

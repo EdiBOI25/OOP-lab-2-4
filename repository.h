@@ -3,7 +3,7 @@
 
 // Dynamic array of expenses
 typedef struct {
-	Expense* expenses;
+	Expense** expenses;
 	int length;
 	int capacity;
 } Repository;
