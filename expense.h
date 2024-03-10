@@ -15,7 +15,7 @@ typedef struct{
 //	amount: int
 //	type: string (char[])
 //	returns struct Expense
-Expense* construct_expense(int day, int amount, char* type);
+Expense* expense_construct(int day, int amount, char* type);
 
 /**
  * \brief Frees the memory allocated for the expense

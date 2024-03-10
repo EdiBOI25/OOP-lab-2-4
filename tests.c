@@ -10,24 +10,24 @@
 
 void test_all() {
 	//// test expense
-	Expense* e1 = construct_expense(12, 300, "mancare");
+	Expense* e1 = expense_construct(12, 300, "mancare");
 	assert(e1->day == 12);
 	assert(e1->amount == 300);
 	assert(strcmp(e1->type, "mancare") == 0);
 	destruct_expense(e1);
 
 	// test repository
-	Repository* repo = construct_repository();
+	Repository* repo = repository_construct();
 	for(int i = 0; i < 10; i++) {
-		Expense* e = construct_expense(i, i * 100, "mancare");
-		add_expense(repo, e);
+		Expense* e = expense_construct(i, i * 100, "mancare");
+		repository_add_expense(repo, e);
 	}
 	assert(repo->length == 10);
 	assert(repo->capacity == 16);
-	assert(get_expense(repo, 3)->day == 3);
-	assert(get_expense(repo, 7)->amount == 700);
+	assert(repository_get_expense(repo, 3)->day == 3);
+	assert(repository_get_expense(repo, 7)->amount == 700);
 
-	destruct_repository(repo);
+	repository_destruct(repo);
 
 	printf("Tests passed\n");
 }
