@@ -12,7 +12,7 @@ Expense* expense_construct(int day, int amount, char* type) {
 	return e;
 }
 
-void destruct_expense(Expense *e) {
+void expense_destruct(Expense *e) {
 	if (e == NULL) {
 		return;
 	}
@@ -23,4 +23,20 @@ void destruct_expense(Expense *e) {
 void print_expense(Expense* e) {
 	printf("Day: %d, Amount: %d, Type: %s\n",
 		e->day, e->amount, e->type);
+}
+
+int expense_is_valid(Expense* e) {
+	if (e->day > 31) {
+		return 0;
+	}
+	if (e->amount < 0) {
+		return 0;
+	}
+	if (e->type == NULL) {
+		return 0;
+	}
+	if (strlen(e->type) < 3) {
+		return 0;
+	}
+	return 1;
 }

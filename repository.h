@@ -42,3 +42,9 @@ void repository_resize(Repository* repo);
  */
 Expense* repository_get_expense(Repository* repo, int position);
 
+/**
+ * \brief Returns the list of expenses
+ * \param repo: the repository which has the list of expenses
+ * \return list of expenses
+ */
+Expense** repository_get_all(Repository* repo);

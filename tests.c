@@ -7,6 +7,7 @@
 
 #include "expense.h"
 #include "repository.h"
+#include "service.h"
 
 void test_all() {
 	//// test expense
@@ -14,7 +15,11 @@ void test_all() {
 	assert(e1->day == 12);
 	assert(e1->amount == 300);
 	assert(strcmp(e1->type, "mancare") == 0);
-	destruct_expense(e1);
+	assert(expense_is_valid(e1));
+	assert(expense_is_valid(expense_construct(32, 10, "asd")) == 0);
+	assert(expense_is_valid(expense_construct(15, -100, "asdasd")) == 0);
+	assert(expense_is_valid(expense_construct(15, 100, "as")) == 0);
+	expense_destruct(e1);
 
 	// test repository
 	Repository* repo = repository_construct();
@@ -28,6 +33,17 @@ void test_all() {
 	assert(repository_get_expense(repo, 7)->amount == 700);
 
 	repository_destruct(repo);
+
+	// test service
+	repo = repository_construct();
+	Service* serv = service_construct(repo);
+	for (int i = 0; i < 10; ++i) {
+		service_add_expense(serv, i, 100 * i, "altele");
+	}
+	Expense** list = repository_get_all(serv->repository);
+	assert(list[2]->day == 2);
+	assert(list[5]->amount == 500);
+	assert(strcmp(list[7]->type, "altele") == 0);
 
 	printf("Tests passed\n");
 }

@@ -11,8 +11,11 @@ Repository* repository_construct() {
 }
 
 void repository_destruct(Repository* repo) {
+    if (repo == NULL) {
+        return;
+    }
 	for (int i = repo->length - 1; i >= 0; i--) {
-        destruct_expense(repo->expenses[i]);
+        expense_destruct(repo->expenses[i]);
     }
     free(repo->expenses);
     free(repo);
@@ -40,4 +43,8 @@ void repository_resize(Repository* repo) {
 
 Expense* repository_get_expense(Repository* repo, int position) {
 	return (repo->expenses[position]);
+}
+
+Expense** repository_get_all(Repository* repo) {
+    return repo->expenses;
 }
