@@ -2,9 +2,13 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 UI* ui_construct(Service* service) {
 	UI* ui = malloc(sizeof(UI));
+	if (ui == NULL) {
+		return NULL;
+	}
 	ui->service = service;
 	return ui;
 }
@@ -17,6 +21,10 @@ void ui_destruct(UI* ui) {
 }
 
 void ui_run(UI* ui) {
+	for (int i = 0; i < 10; ++i) {
+		service_add_expense(ui->service, i+1, i*100, "default");
+	}
+
 	char main_menu[] = "EXPENSES MENU\n"
 		"1. Add expense\n"
 		"2. Edit expense\n"
@@ -38,6 +46,9 @@ void ui_run(UI* ui) {
 			return;
 		case 1:
 			ui_add_expense(ui);
+			break;
+		case 2:
+			ui_edit_expense(ui);
 			break;
 		case 9:
 			ui_print_all_expenses(ui);
@@ -64,4 +75,42 @@ void ui_add_expense(UI* ui) {
 
 void ui_print_all_expenses(UI* ui) {
 	repository_print_all(ui->service->repository);
+}
+
+void ui_edit_expense(UI* ui) {
+	ui_print_all_expenses(ui);
+	printf("Choose the number of the expense you want to edit: ");
+	int position;
+	scanf("%d", &position);
+	if (position >= ui->service->repository->length) {
+		printf("Invalid position.");
+		return;
+	}
+	printf("Choose the parameter you want to edit (day/amount/type): ");
+	char param[10];
+	scanf("%s", param);
+	if (strcmp(param, "day") == 0) {
+		int day;
+		printf("Enter new value for day: ");
+		scanf("%d", &day);
+		service_set_day(ui->service, position, day);
+		printf("Day edited!\n");
+	}
+	else if (strcmp(param, "amount") == 0) {
+		int amount;
+		printf("Enter new value for amount: ");
+		scanf("%d", &amount);
+		service_set_amount(ui->service, position, amount);
+		printf("Amount edited!\n");
+	}
+	else if (strcmp(param, "type") == 0) {
+		char* type[50];
+		printf("Enter new value for amount: ");
+		scanf("%s", type);
+		service_set_type(ui->service, position, type);
+		printf("Type edited!\n");
+	}
+	else {
+		printf("Invalid parameter name.\n");
+	}
 }

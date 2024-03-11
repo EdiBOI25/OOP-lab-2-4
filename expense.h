@@ -35,3 +35,24 @@ void print_expense(Expense* e);
  * \return true if the expense is valid, false if contrary
  */
 int expense_is_valid(Expense* e);
+
+/**
+ * \brief Sets a new day for the expense
+ * \param e the expense whose day will be modified
+ * \param new_day the new day
+ */
+void expense_set_day(Expense* e, int new_day);
+
+/**
+ * \brief Sets a new amount for the expense
+ * \param e the expense whose amount will be modified
+ * \param new_amount the new amount
+ */
+void expense_set_amount(Expense* e, int new_amount);
+
+/**
+ * \brief Sets a new type for the expense
+ * \param e the expense whose type will be modified
+ * \param new_type the new type
+ */
+void expense_set_type(Expense* e, char* new_type);

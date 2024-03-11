@@ -19,6 +19,14 @@ void test_all() {
 	assert(expense_is_valid(expense_construct(32, 10, "asd")) == 0);
 	assert(expense_is_valid(expense_construct(15, -100, "asdasd")) == 0);
 	assert(expense_is_valid(expense_construct(15, 100, "as")) == 0);
+
+	expense_set_day(e1, 20);
+	assert(e1->day = 20);
+	expense_set_amount(e1, 200000);
+	assert(e1->amount = 200000);
+	expense_set_type(e1, "qwerty");
+	assert(strcmp(e1->type, "qwerty") == 0);
+
 	expense_destruct(e1);
 
 	// test repository
@@ -32,9 +40,10 @@ void test_all() {
 	assert(repository_get_expense(repo, 3)->day == 3);
 	assert(repository_get_expense(repo, 7)->amount == 700);
 
-	Expense* ne = expense_construct(31, 3131, "masina");
-	repository_replace_expense(repo, 3, ne);
-	assert(repository_get_expense(repo, 3)->day == 31);
+	repository_set_day(repo, 3, 20);
+	assert(repository_get_expense(repo, 3)->day == 20);
+	repository_set_amount(repo, 7, 200000);
+	assert(repository_get_expense(repo, 7)->amount == 200000);
 
 	repository_destruct(repo);
 
@@ -48,6 +57,13 @@ void test_all() {
 	assert(list[2]->day == 3);
 	assert(list[5]->amount == 500);
 	assert(strcmp(list[7]->type, "altele") == 0);
+
+	service_set_day(serv, 2, 20);
+	assert(list[2]->day == 20);
+	service_set_amount(serv, 5, 2000);
+	assert(list[5]->amount == 2000);
+	service_set_type(serv, 7, "qwerty");
+	assert(strcmp(list[7]->type, "qwerty") == 0);
 
 	printf("Tests passed\n");
 }

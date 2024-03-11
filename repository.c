@@ -1,10 +1,17 @@
 #include "repository.h" 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 Repository* repository_construct() {
     Repository* repo = malloc(sizeof(Repository));
+    if (repo == NULL) {
+        return NULL;
+    }
     repo->expenses = malloc(2 * sizeof(Expense));
+    if (repo->expenses == NULL) {
+        return NULL;
+    }
     repo->length = 0;
     repo->capacity = 1;
     return repo;
@@ -57,7 +64,23 @@ void repository_print_all(Repository* repo) {
     printf("\n");
 }
 
-void repository_replace_expense(Repository* repo, int position, Expense* new_expense) {
-    expense_destruct(repo->expenses[position]);
-	repo->expenses[position] = new_expense;
+void repository_set_day(Repository* repo, int position, int new_day) {
+    if (repo == NULL) {
+        return;
+    }
+    expense_set_day(repo->expenses[position], new_day);
+}
+
+void repository_set_amount(Repository* repo, int position, int new_amount) {
+    if (repo == NULL) {
+        return;
+    }
+    expense_set_amount(repo->expenses[position], new_amount);
+}
+
+void repository_set_type(Repository* repo, int position, char* new_type) {
+	if (repo == NULL) {
+        return;
+	}
+    expense_set_type(repo->expenses[position], new_type);
 }
