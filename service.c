@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "service.h"
 
+#include <stdio.h>
 #include <string.h>
 
 #include "repository.h"
@@ -51,4 +52,9 @@ void service_set_type(Service* serv, int position, char* new_type) {
 	repository_set_type(serv->repository, position, new_type);
 }
 
-
+void service_delete_expense(Service* serv, int position) {
+	if (serv == NULL) {
+		return;
+	}
+	repository_delete_expense(serv->repository, position);
+}

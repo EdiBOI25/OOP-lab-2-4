@@ -78,3 +78,10 @@ void repository_set_amount(Repository* repo, int position, int new_amount);
  * \param new_type new value of type
  */
 void repository_set_type(Repository* repo, int position, char* new_type);
+
+/**
+ * \brief Deletes the expense at a given position
+ * \param repo the repository which has the expenses
+ * \param position the position of the expense to remove
+ */
+void repository_delete_expense(Repository* repo, int position);

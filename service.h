@@ -51,3 +51,10 @@ void service_set_amount(Service* serv, int position, int new_amount);
  * \param new_type new value of type
  */
 void service_set_type(Service* serv, int position, char* new_type);
+
+/**
+ * \brief Deletes the expense at a given position
+ * \param serv the service which has the expenses
+ * \param position the position of the expense to delete
+ */
+void service_delete_expense(Service* serv, int position);

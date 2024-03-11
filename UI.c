@@ -50,6 +50,9 @@ void ui_run(UI* ui) {
 		case 2:
 			ui_edit_expense(ui);
 			break;
+		case 3:
+			ui_delete_expense(ui);
+			break;
 		case 9:
 			ui_print_all_expenses(ui);
 			break;
@@ -82,7 +85,7 @@ void ui_edit_expense(UI* ui) {
 	printf("Choose the number of the expense you want to edit: ");
 	int position;
 	scanf("%d", &position);
-	if (position >= ui->service->repository->length) {
+	if (position >= ui->service->repository->length || position < 0) {
 		printf("Invalid position.");
 		return;
 	}
@@ -113,4 +116,17 @@ void ui_edit_expense(UI* ui) {
 	else {
 		printf("Invalid parameter name.\n");
 	}
+}
+
+void ui_delete_expense(UI* ui) {
+	ui_print_all_expenses(ui);
+	printf("Choose the number of the expense you want to delete: ");
+	int position;
+	scanf("%d", &position);
+	if (position >= ui->service->repository->length || position < 0) {
+		printf("Invalid position.");
+		return;
+	}
+	service_delete_expense(ui->service, position);
+	printf("Expense deleted.\n");
 }

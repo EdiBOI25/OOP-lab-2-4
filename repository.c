@@ -49,6 +49,9 @@ void repository_resize(Repository* repo) {
 }
 
 Expense* repository_get_expense(Repository* repo, int position) {
+    if (position < 0 || position >= repo->length) {
+        return NULL;
+    }
 	return (repo->expenses[position]);
 }
 
@@ -68,11 +71,17 @@ void repository_set_day(Repository* repo, int position, int new_day) {
     if (repo == NULL) {
         return;
     }
+    if (position < 0 || position >= repo->length) {
+        return;
+    }
     expense_set_day(repo->expenses[position], new_day);
 }
 
 void repository_set_amount(Repository* repo, int position, int new_amount) {
     if (repo == NULL) {
+        return;
+    }
+    if (position < 0 || position >= repo->length) {
         return;
     }
     expense_set_amount(repo->expenses[position], new_amount);
@@ -82,5 +91,22 @@ void repository_set_type(Repository* repo, int position, char* new_type) {
 	if (repo == NULL) {
         return;
 	}
+    if (position < 0 || position >= repo->length) {
+        return;
+    }
     expense_set_type(repo->expenses[position], new_type);
+}
+
+void repository_delete_expense(Repository* repo, int position) {
+    if (repo == NULL) {
+        return;
+    }
+    if (position < 0 || position >= repo->length) {
+        return;
+    }
+    expense_destruct(repo->expenses[position]);
+    for(int i = position; i < repo->length - 1; ++i) {
+        repo->expenses[i] = repo->expenses[i + 1];
+    }
+    repo->length--;
 }

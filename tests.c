@@ -45,6 +45,10 @@ void test_all() {
 	repository_set_amount(repo, 7, 200000);
 	assert(repository_get_expense(repo, 7)->amount == 200000);
 
+	repository_delete_expense(repo, 3);
+	assert(repo->length == 9);
+	assert(repository_get_expense(repo, 5)->day == 6);
+
 	repository_destruct(repo);
 
 	// test service

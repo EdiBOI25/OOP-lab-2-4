@@ -41,3 +41,9 @@ void ui_print_all_expenses(UI* ui);
  * \param ui the ui currently running
  */
 void ui_edit_expense(UI* ui);
+
+/**
+ * \brief Deletes an expense from the list
+ * \param ui the ui currently running
+ */
+void ui_delete_expense(UI* ui);
