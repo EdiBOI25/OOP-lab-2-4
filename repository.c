@@ -48,3 +48,9 @@ Expense* repository_get_expense(Repository* repo, int position) {
 Expense** repository_get_all(Repository* repo) {
     return repo->expenses;
 }
+
+void repository_print_all(Repository* repo) {
+	for (int i = 0; i < repo->length; ++i) {
+        print_expense(repo->expenses[i]);
+	}
+}

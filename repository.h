@@ -48,3 +48,9 @@ Expense* repository_get_expense(Repository* repo, int position);
  * \return list of expenses
  */
 Expense** repository_get_all(Repository* repo);
+
+/**
+ * \brief Prints all expenses stored in the repository
+ * \param repo the repository that contains all the expenses
+ */
+void repository_print_all(Repository* repo);

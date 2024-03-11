@@ -30,7 +30,7 @@
     <ClCompile Include="service.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UI.cpp">
+    <ClCompile Include="UI.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
