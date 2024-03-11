@@ -32,16 +32,20 @@ void test_all() {
 	assert(repository_get_expense(repo, 3)->day == 3);
 	assert(repository_get_expense(repo, 7)->amount == 700);
 
+	Expense* ne = expense_construct(31, 3131, "masina");
+	repository_replace_expense(repo, 3, ne);
+	assert(repository_get_expense(repo, 3)->day == 31);
+
 	repository_destruct(repo);
 
 	// test service
 	repo = repository_construct();
 	Service* serv = service_construct(repo);
 	for (int i = 0; i < 10; ++i) {
-		service_add_expense(serv, i, 100 * i, "altele");
+		service_add_expense(serv, i+1, 100 * i, "altele");
 	}
 	Expense** list = repository_get_all(serv->repository);
-	assert(list[2]->day == 2);
+	assert(list[2]->day == 3);
 	assert(list[5]->amount == 500);
 	assert(strcmp(list[7]->type, "altele") == 0);
 

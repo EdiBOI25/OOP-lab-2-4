@@ -54,3 +54,11 @@ Expense** repository_get_all(Repository* repo);
  * \param repo the repository that contains all the expenses
  */
 void repository_print_all(Repository* repo);
+
+/**
+ * \brief Replaces an expense with a new one
+ * \param repo the repository containing the expenses
+ * \param position the position of the expense to replace
+ * \param new_expense the expense to replace the old one with
+ */
+void repository_replace_expense(Repository* repo, int position, Expense* new_expense);

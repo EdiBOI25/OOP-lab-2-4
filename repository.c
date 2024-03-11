@@ -51,6 +51,13 @@ Expense** repository_get_all(Repository* repo) {
 
 void repository_print_all(Repository* repo) {
 	for (int i = 0; i < repo->length; ++i) {
+        printf("%d: ", i);
         print_expense(repo->expenses[i]);
 	}
+    printf("\n");
+}
+
+void repository_replace_expense(Repository* repo, int position, Expense* new_expense) {
+    expense_destruct(repo->expenses[position]);
+	repo->expenses[position] = new_expense;
 }

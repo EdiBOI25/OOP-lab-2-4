@@ -26,6 +26,9 @@ void print_expense(Expense* e) {
 }
 
 int expense_is_valid(Expense* e) {
+	if (e->day < 1) {
+		return 0;
+	}
 	if (e->day > 31) {
 		return 0;
 	}
