@@ -50,6 +50,12 @@ void ui_delete_expense(UI* ui);
 
 /**
  * \brief Filters expenses by given parameter
- * \param ui the uit currently running
+ * \param ui the ui currently running
  */
 void ui_filter_expense(UI* ui);
+
+/**
+ * \brief Sorts expenses
+ * \param ui the ui currently running
+ */
+void ui_sort_expense(UI* ui);

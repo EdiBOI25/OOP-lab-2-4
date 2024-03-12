@@ -65,3 +65,17 @@ void service_delete_expense(Service* serv, int position);
  * \param type the type to filter expenses by
  */
 void service_filter_by_type(Service* serv, char* type);
+
+/**
+ * \brief Sorts and prints the expenses by amount
+ * \param serv the service in use
+ * \param reverse 1 if sorting should be in reverse order, 0 if contrary
+ */
+void service_sort_by_amount(Service* serv, int reverse);
+
+/**
+ * \brief Sorts and prints the expenses by type
+ * \param serv the service in use
+ * \param reverse 1 if sorting should be in reverse order, 0 if contrary
+ */
+void service_sort_by_type(Service* serv, int reverse);

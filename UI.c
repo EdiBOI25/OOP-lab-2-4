@@ -56,6 +56,9 @@ void ui_run(UI* ui) {
 		case 4:
 			ui_filter_expense(ui);
 			break;
+		case 5:
+			ui_sort_expense(ui);
+			break;
 		case 9:
 			ui_print_all_expenses(ui);
 			break;
@@ -158,5 +161,24 @@ void ui_filter_expense(UI* ui) {
 	}
 	else {
 		printf("Invalid filter.\n");
+	}
+}
+
+void ui_sort_expense(UI* ui) {
+	printf("Choose parameter to sort by (amount/type): ");
+	char* param[50];
+	scanf("%s", param);
+	printf("Choose if sorting should be in reverse order (1 or 0): ");
+	int reverse;
+	scanf("%d", &reverse);
+	if (strcmp(param, "amount") == 0) {
+		printf("WTF\n");
+		service_sort_by_amount(ui->service, reverse);
+	}
+	else if (strcmp(param, "type") == 0) {
+		service_sort_by_type(ui->service, reverse);
+	}
+	else {
+		printf("Invalid parameter.\n");
 	}
 }
