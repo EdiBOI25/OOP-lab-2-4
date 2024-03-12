@@ -53,6 +53,9 @@ void ui_run(UI* ui) {
 		case 3:
 			ui_delete_expense(ui);
 			break;
+		case 4:
+			ui_filter_expense(ui);
+			break;
 		case 9:
 			ui_print_all_expenses(ui);
 			break;
@@ -108,7 +111,7 @@ void ui_edit_expense(UI* ui) {
 	}
 	else if (strcmp(param, "type") == 0) {
 		char* type[50];
-		printf("Enter new value for amount: ");
+		printf("Enter new value for type: ");
 		scanf("%s", type);
 		service_set_type(ui->service, position, type);
 		printf("Type edited!\n");
@@ -129,4 +132,31 @@ void ui_delete_expense(UI* ui) {
 	}
 	service_delete_expense(ui->service, position);
 	printf("Expense deleted.\n");
+}
+
+void ui_filter_expense(UI* ui) {
+	char* filter[50];
+	printf("Choose the parameter you want to filter by (day/amount/type): ");
+	scanf("%s", filter);
+	if (strcmp(filter, "day") == 0) {
+		int day;
+		printf("Enter value for day: ");
+		scanf("%d", &day);
+		printf("Filtering by day...\n");
+	}
+	else if (strcmp(filter, "amount") == 0) {
+		int amount;
+		printf("Enter new for amount: ");
+		scanf("%d", &amount);
+		printf("Filtering by amount...\n");
+	}
+	else if (strcmp(filter, "type") == 0) {
+		char* type[50];
+		printf("Enter value for type: ");
+		scanf("%s", type);
+		service_filter_by_type(ui->service, type);
+	}
+	else {
+		printf("Invalid filter.\n");
+	}
 }

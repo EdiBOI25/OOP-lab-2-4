@@ -58,3 +58,7 @@ void service_delete_expense(Service* serv, int position) {
 	}
 	repository_delete_expense(serv->repository, position);
 }
+
+void service_filter_by_type(Service* serv, char* type) {
+	repository_filter_by_type(serv->repository, type);
+}

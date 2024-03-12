@@ -58,3 +58,10 @@ void service_set_type(Service* serv, int position, char* new_type);
  * \param position the position of the expense to delete
  */
 void service_delete_expense(Service* serv, int position);
+
+/**
+ * \brief Filters and prints expenses which match the given type
+ * \param serv the service in use
+ * \param type the type to filter expenses by
+ */
+void service_filter_by_type(Service* serv, char* type);

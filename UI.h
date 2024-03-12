@@ -47,3 +47,9 @@ void ui_edit_expense(UI* ui);
  * \param ui the ui currently running
  */
 void ui_delete_expense(UI* ui);
+
+/**
+ * \brief Filters expenses by given parameter
+ * \param ui the uit currently running
+ */
+void ui_filter_expense(UI* ui);

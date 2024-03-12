@@ -110,3 +110,14 @@ void repository_delete_expense(Repository* repo, int position) {
     }
     repo->length--;
 }
+
+void repository_filter_by_type(Repository* repo, char* type) {
+    if (repo == NULL || type == NULL) {
+        return;
+    }
+    for (int i = 0; i < repo->length; ++i) {
+	    if(strcmp(repo->expenses[i]->type, type) == 0) {
+            print_expense(repo->expenses[i]);
+	    }
+    }
+}

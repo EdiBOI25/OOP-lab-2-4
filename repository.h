@@ -85,3 +85,10 @@ void repository_set_type(Repository* repo, int position, char* new_type);
  * \param position the position of the expense to remove
  */
 void repository_delete_expense(Repository* repo, int position);
+
+/**
+ * \brief Filters and prints expenses which match the given type
+ * \param repo the repository containing the expenses
+ * \param type the type to filter by
+ */
+void repository_filter_by_type(Repository* repo, char* type);
