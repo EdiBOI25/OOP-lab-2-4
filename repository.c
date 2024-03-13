@@ -8,12 +8,13 @@ Repository* repository_construct() {
     if (repo == NULL) {
         return NULL;
     }
-    repo->expenses = malloc(2 * sizeof(Expense));
+    /*repo->expenses = malloc(2 * sizeof(Expense));
     if (repo->expenses == NULL) {
         return NULL;
-    }
+    }*/
     repo->length = 0;
-    repo->capacity = 1;
+    //repo->capacity = 1;
+    repo->capacity = 50;
     return repo;
 }
 
@@ -24,29 +25,29 @@ void repository_destruct(Repository* repo) {
 	for (int i = repo->length - 1; i >= 0; i--) {
         expense_destruct(repo->expenses[i]);
     }
-    free(repo->expenses);
+    /*free(repo->expenses);*/
     free(repo);
 }
 
 void repository_add_expense(Repository* repo, Expense* e) {
-    if (repo->length == repo->capacity) {
+    /*if (repo->length == repo->capacity) {
 		repository_resize(repo);
-	}
+	}*/
     repo->expenses[repo->length] = e;
     repo->length++;
 }
 
-void repository_resize(Repository* repo) {
-    int new_capacity = 2 * repo->capacity;
-    Expense** new_expenses = malloc(new_capacity * sizeof(Expense)); // allocate new memory for expenses
-    for (int i = 0; i < repo->length; ++i) {
-        // copy the old expenses to the new array
-	    new_expenses[i] = repo->expenses[i];
-    }
-    free(repo->expenses); // free the old memory
-    repo->capacity = new_capacity;
-    repo->expenses = new_expenses;
-}
+//void repository_resize(Repository* repo) {
+//    int new_capacity = 2 * repo->capacity;
+//    Expense** new_expenses = malloc(new_capacity * sizeof(Expense)); // allocate new memory for expenses
+//    for (int i = 0; i < repo->length; ++i) {
+//        // copy the old expenses to the new array
+//	    new_expenses[i] = repo->expenses[i];
+//    }
+//    free(repo->expenses); // free the old memory
+//    repo->capacity = new_capacity;
+//    repo->expenses = new_expenses;
+//}
 
 Expense* repository_get_expense(Repository* repo, int position) {
     if (position < 0 || position >= repo->length) {

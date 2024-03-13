@@ -79,7 +79,6 @@ void ui_add_expense(UI* ui) {
 	printf("Enter type: ");
 	scanf("%s", type);
 	service_add_expense(ui->service, day, amount, type);
-	printf("Expense added successfully!\n");
 }
 
 void ui_print_all_expenses(UI* ui) {
@@ -103,21 +102,18 @@ void ui_edit_expense(UI* ui) {
 		printf("Enter new value for day: ");
 		scanf("%d", &day);
 		service_set_day(ui->service, position, day);
-		printf("Day edited!\n");
 	}
 	else if (strcmp(param, "amount") == 0) {
 		int amount;
 		printf("Enter new value for amount: ");
 		scanf("%d", &amount);
 		service_set_amount(ui->service, position, amount);
-		printf("Amount edited!\n");
 	}
 	else if (strcmp(param, "type") == 0) {
 		char* type[50];
 		printf("Enter new value for type: ");
 		scanf("%s", type);
 		service_set_type(ui->service, position, type);
-		printf("Type edited!\n");
 	}
 	else {
 		printf("Invalid parameter name.\n");
@@ -134,7 +130,6 @@ void ui_delete_expense(UI* ui) {
 		return;
 	}
 	service_delete_expense(ui->service, position);
-	printf("Expense deleted.\n");
 }
 
 void ui_filter_expense(UI* ui) {
