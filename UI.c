@@ -172,7 +172,6 @@ void ui_sort_expense(UI* ui) {
 	int reverse;
 	scanf("%d", &reverse);
 	if (strcmp(param, "amount") == 0) {
-		printf("WTF\n");
 		service_sort_by_amount(ui->service, reverse);
 	}
 	else if (strcmp(param, "type") == 0) {
