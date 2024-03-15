@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="dynamic_array.c" />
     <ClCompile Include="expense.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="repository.c" />
@@ -147,6 +148,7 @@
     <ClCompile Include="UI.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dynamic_array.h" />
     <ClInclude Include="expense.h" />
     <ClInclude Include="repository.h" />
     <ClInclude Include="service.h" />

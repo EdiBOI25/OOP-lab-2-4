@@ -10,11 +10,11 @@ Expense* expense_construct(int day, int amount, char* type) {
 	}
 	e->day = day;
 	e->amount = amount;
-	/*e->type = malloc((strlen(type) + 1));
+	e->type = malloc((strlen(type) + 1));
 	if (e->type == NULL) {
 		free(e);
 		return NULL;
-	}*/
+	}
 	strcpy(e->type, type);
 	return e;
 }
@@ -23,7 +23,7 @@ void expense_destruct(Expense *e) {
 	if (e == NULL) {
 		return;
 	}
-	//free(e->type);
+	free(e->type);
 	free(e);
 }
 
@@ -42,9 +42,9 @@ int expense_is_valid(Expense* e) {
 	if (e->amount < 0) {
 		return 0;
 	}
-	/*if (e->type == NULL) {
+	if (e->type == NULL) {
 		return 0;
-	}*/
+	}
 	if (strlen(e->type) < 3) {
 		return 0;
 	}
@@ -60,10 +60,10 @@ void expense_set_amount(Expense* e, int new_amount) {
 }
 
 void expense_set_type(Expense* e, char* new_type) {
-	/*if (new_type == NULL) {
+	if (new_type == NULL) {
 		return;
 	}
 	free(e->type);
-	e->type = malloc((strlen(new_type) + 1));*/
+	e->type = malloc((strlen(new_type) + 1));
 	strcpy(e->type, new_type);
 }

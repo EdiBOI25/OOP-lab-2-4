@@ -6,8 +6,7 @@
 typedef struct{
 	int day;
 	int amount;
-	//char* type;
-	char type[50];
+	char* type;
 } Expense;
 
 
