@@ -1,17 +1,17 @@
 #pragma once
-#include "repository.h"
+#include "dynamic_array.h"
 #include "expense.h"
 
 typedef struct {
-	Repository* repository;
+	DynamicArray* list;
 } Service;
 
 /**
  * \brief Creates a service
- * \param repository: the repository that the service will use
+ * \param list the list of expenses that the service will use
  * \return the service
  */
-Service* service_construct(Repository* repository);
+Service* service_construct(DynamicArray* list);
 
 /**
  * \brief Distructs a service

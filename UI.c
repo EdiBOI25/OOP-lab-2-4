@@ -82,7 +82,7 @@ void ui_add_expense(UI* ui) {
 }
 
 void ui_print_all_expenses(UI* ui) {
-	repository_print_all(ui->service->repository);
+	//repository_print_all(ui->service->repository);
 }
 
 void ui_edit_expense(UI* ui) {
@@ -90,7 +90,7 @@ void ui_edit_expense(UI* ui) {
 	printf("Choose the number of the expense you want to edit: ");
 	int position;
 	scanf("%d", &position);
-	if (position >= ui->service->repository->length || position < 0) {
+	if (position >= ui->service->list->length || position < 0) {
 		printf("Invalid position.");
 		return;
 	}
@@ -125,7 +125,7 @@ void ui_delete_expense(UI* ui) {
 	printf("Choose the number of the expense you want to delete: ");
 	int position;
 	scanf("%d", &position);
-	if (position >= ui->service->repository->length || position < 0) {
+	if (position >= ui->service->list->length || position < 0) {
 		printf("Invalid position.");
 		return;
 	}

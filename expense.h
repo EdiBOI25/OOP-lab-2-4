@@ -56,3 +56,10 @@ void expense_set_amount(Expense* e, int new_amount);
  * \param new_type the new type
  */
 void expense_set_type(Expense* e, char* new_type);
+
+/**
+ * \brief Creates and returns a deep copy of an expense
+ * \param source_expense the expense whose contents will be copied
+ * \return the deep copy of source expense
+ */
+Expense* expense_deep_copy(Expense* source_expense);

@@ -7,6 +7,7 @@
 
 #include "expense.h"
 #include "repository.h"
+#include "dynamic_array.h"
 #include "service.h"
 
 void test_all() {
@@ -28,46 +29,48 @@ void test_all() {
 	expense_set_type(e1, "qwerty");
 	assert(strcmp(e1->type, "qwerty") == 0);
 
+	Expense* copy_exp = expense_deep_copy(e1);
+	assert(e1->day == 20);
+	assert(e1->amount == 200000);
+	assert(strcmp(e1->type, "qwerty") == 0);
+
 	print_expense(e1);
 	expense_destruct(e1);
 
-	// test repository
-	Repository* repo = repository_construct();
-	for(int i = 0; i < 10; i++) {
+	// test dynamic array
+	DynamicArray* dynamic_array = array_construct(2);
+	assert(dynamic_array->capacity == 2);
+	for (int i = 0; i < 10; i++) {
 		Expense* e = expense_construct(i, i * 100, "mancare");
-		repository_add_expense(repo, e);
+		array_add_expense(dynamic_array, e);
 	}
-	assert(repo->length == 10);
-	//assert(repo->capacity == 16);
-	assert(repository_get_expense(repo, 3)->day == 3);
-	assert(repository_get_expense(repo, 7)->amount == 700);
+	assert(dynamic_array->length == 10);
+	assert(dynamic_array->capacity== 16);
 
-	repository_set_day(repo, 3, 20);
-	assert(repository_get_expense(repo, 3)->day == 20);
-	repository_set_amount(repo, 7, 200000);
-	assert(repository_get_expense(repo, 7)->amount == 200000);
+	assert(array_get_expense(dynamic_array, 3)->day == 3);
+	assert(array_get_expense(dynamic_array, 7)->amount == 700);
 
-	repository_set_day(repo, 100, 20);
-	repository_set_type(repo, 100, "random");
+	array_delete_expense(dynamic_array, 3);
+	array_delete_expense(dynamic_array, 100);
+	assert(dynamic_array->length == 9);
+	assert(array_get_expense(dynamic_array, 5)->day == 6);
 
-	repository_delete_expense(repo, 3);
-	repository_delete_expense(repo, 100);
-	assert(repo->length == 9);
-	assert(repository_get_expense(repo, 5)->day == 6);
-	Expense* NOTHING = repository_get_expense(repo, 100);
+	DynamicArray* copy_array = array_deep_copy(dynamic_array);
+	assert(copy_array->length == 9);
+	assert(copy_array->capacity == 16);
+	assert(array_get_expense(copy_array, 5)->day == 6);
 
-	repository_print_all(repo);
-
-	repository_destruct(repo);
+	array_destruct(dynamic_array);
+	
 
 	// test service
-	repo = repository_construct();
-	Service* serv = service_construct(repo);
+	dynamic_array = array_construct(10);
+	Service* serv = service_construct(dynamic_array);
 	for (int i = 0; i < 10; ++i) {
 		service_add_expense(serv, i+1, 100 * i, "altele");
 	}
 	service_add_expense(serv, -10, 123, "ceva");
-	Expense** list = repository_get_all(serv->repository);
+	Expense** list = array_get_all(serv->list);
 	assert(list[2]->day == 3);
 	assert(list[5]->amount == 500);
 	assert(strcmp(list[7]->type, "altele") == 0);
@@ -97,6 +100,8 @@ void test_all() {
 	service_sort_by_type(serv, 1);
 	service_sort_by_type(serv, 0);
 
+	service_destruct(serv);
+	array_destruct(dynamic_array);
 
 	system("cls");
 	printf("Tests passed\n");

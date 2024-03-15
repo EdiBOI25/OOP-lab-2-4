@@ -8,6 +8,7 @@ Expense* expense_construct(int day, int amount, char* type) {
 	if (e == NULL) {
 		return NULL;
 	}
+
 	e->day = day;
 	e->amount = amount;
 	e->type = malloc((strlen(type) + 1));
@@ -15,6 +16,7 @@ Expense* expense_construct(int day, int amount, char* type) {
 		free(e);
 		return NULL;
 	}
+
 	strcpy(e->type, type);
 	return e;
 }
@@ -28,15 +30,15 @@ void expense_destruct(Expense *e) {
 }
 
 void print_expense(Expense* e) {
+	if(e == NULL) {
+		return;
+	}
 	printf("Day: %d, Amount: %d, Type: %s\n",
 		e->day, e->amount, e->type);
 }
 
 int expense_is_valid(Expense* e) {
-	if (e->day < 1) {
-		return 0;
-	}
-	if (e->day > 31) {
+	if (e->day < 1 || e->day > 31) {
 		return 0;
 	}
 	if (e->amount < 0) {
@@ -66,4 +68,8 @@ void expense_set_type(Expense* e, char* new_type) {
 	free(e->type);
 	e->type = malloc((strlen(new_type) + 1));
 	strcpy(e->type, new_type);
+}
+
+Expense* expense_deep_copy(Expense* source_expense) {
+	return expense_construct(source_expense->day, source_expense->amount, source_expense->type);
 }
