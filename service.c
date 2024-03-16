@@ -90,10 +90,6 @@ int compare_string(const void* a, const void* b) {
 	return strcmp(a, b) == 0;
 }
 
-int compare(const void* el1, const void* el2, int (*method)(const void* a, const void* b)) {
-	return method(el1, el2);
-}
-
 DynamicArray* service_filter(Service* serv, char* parameter, void* key) {
 	if (serv == NULL || parameter == NULL || key == NULL) {
 		return NULL;

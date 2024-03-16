@@ -56,6 +56,7 @@ void test_all() {
 
 	assert(array_get_expense(dynamic_array, 3)->day == 3);
 	assert(array_get_expense(dynamic_array, 7)->amount == 700);
+	assert(array_get_expense(dynamic_array, 300) == NULL);
 
 	array_delete_expense(dynamic_array, 3);
 	array_delete_expense(dynamic_array, 100);
@@ -93,6 +94,7 @@ void test_all() {
 	service_set_day(serv, 3, 100);
 	service_set_amount(serv, 3, -100);
 	service_set_type(serv, 3, "a");
+	service_set_type(serv, 300, "ahgjhghgjhg");
 
 	service_delete_expense(serv, 5);
 	assert(list[5]->day == 7);
