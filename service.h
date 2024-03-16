@@ -60,11 +60,12 @@ void service_set_type(Service* serv, int position, char* new_type);
 void service_delete_expense(Service* serv, int position);
 
 /**
- * \brief Filters and prints expenses which match the given type
+ * \brief Filters and prints expenses which match the given parameters
  * \param serv the service in use
- * \param type the type to filter expenses by
+ * \param parameter the parameter to filter by (must be day, amount or type)
+ * \param key the key to filter by (ex: 30, 2000, food)
  */
-void service_filter_by_type(Service* serv, char* type);
+void service_filter(Service* serv, char* parameter, void* key);
 
 /**
  * \brief Sorts and prints the expenses by amount

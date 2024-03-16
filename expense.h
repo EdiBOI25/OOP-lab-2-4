@@ -37,6 +37,27 @@ void print_expense(Expense* e);
 int expense_is_valid(Expense* e);
 
 /**
+ * \brief Returns the day of the expense
+ * \param e the expense to get the day from
+ * \return the day of the expense
+ */
+int expense_get_day(Expense* e);
+
+/**
+ * \brief Returns the amount of the expense
+ * \param e the expense to get the amount from
+ * \return the amount of the expense
+ */
+int expense_get_amount(Expense* e);
+
+/**
+ * \brief Returns the type of the expense
+ * \param e the expense to get the type from
+ * \return the type of the expense
+ */
+char* expense_get_type(Expense* e);
+
+/**
  * \brief Sets a new day for the expense
  * \param e the expense whose day will be modified
  * \param new_day the new day

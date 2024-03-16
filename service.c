@@ -82,15 +82,47 @@ void service_delete_expense(Service* serv, int position) {
 	array_delete_expense(serv->list, position);
 }
 
-void service_filter_by_type(Service* serv, char* type) {
-	if (serv == NULL || type == NULL) {
+int compare_int(const void* a, const void* b) {
+	return a == b;
+}
+
+int compare_string(const void* a, const void* b) {
+	return strcmp(a, b) == 0;
+}
+
+int compare(const void* el1, const void* el2, int (*method)(const void* a, const void* b)) {
+	return method(el1, el2);
+}
+
+void service_filter(Service* serv, char* parameter, void* key) {
+	if (serv == NULL || parameter == NULL || key == NULL) {
 		return;
 	}
-	for (int i = 0; i < serv->list->length; ++i) {
-		if (strcmp(serv->list->expenses[i]->type, type) == 0) {
+	void* (*getter)(void* to_get); // pointers to functions
+	int (*compare_method)(const void* a, const void* b);
+
+	if (strcmp(parameter, "day") == 0) {
+		getter = expense_get_day;
+		compare_method = compare_int;
+	}
+	else if (strcmp(parameter, "amount") == 0) {
+		getter = expense_get_amount;
+		compare_method = compare_int;
+	}
+	else if (strcmp(parameter, "type") == 0) {
+		getter = expense_get_type;
+		compare_method = compare_string;
+	}
+	else {
+		return;
+	}
+
+	for(int i = 0; i < serv->list->length; ++i) {
+		if((*compare_method)((*getter)(serv->list->expenses[i]), key)) {
 			print_expense(serv->list->expenses[i]);
 		}
 	}
+	
 }
 
 void service_sort_by_amount(Service* serv, int reverse) {

@@ -83,6 +83,11 @@ void ui_add_expense(UI* ui) {
 
 void ui_print_all_expenses(UI* ui) {
 	//repository_print_all(ui->service->repository);
+	for (int i = 0; i < ui->service->list->length; ++i) {
+		printf("%d: ", i);
+		print_expense(ui->service->list->expenses[i]);
+	}
+	printf("\n");
 }
 
 void ui_edit_expense(UI* ui) {
@@ -152,7 +157,7 @@ void ui_filter_expense(UI* ui) {
 		char* type[50];
 		printf("Enter value for type: ");
 		scanf("%s", type);
-		service_filter_by_type(ui->service, type);
+		service_filter(ui->service, filter, type);
 	}
 	else {
 		printf("Invalid filter.\n");

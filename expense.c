@@ -39,18 +39,33 @@ void print_expense(Expense* e) {
 
 int expense_is_valid(Expense* e) {
 	if (e->day < 1 || e->day > 31) {
+		printf("Invalid day: must be between 1 and 31.\n");
 		return 0;
 	}
 	if (e->amount < 0) {
+		printf("Invalid amount: must be positive integer.\n");
 		return 0;
 	}
 	if (e->type == NULL) {
 		return 0;
 	}
 	if (strlen(e->type) < 3) {
+		printf("Invalid type: must have at least 3 characters.\n");
 		return 0;
 	}
 	return 1;
+}
+
+int expense_get_day(Expense* e) {
+	return e->day;
+}
+
+int expense_get_amount(Expense* e) {
+	return e->amount;
+}
+
+char* expense_get_type(Expense* e) {
+	return e->type;
 }
 
 void expense_set_day(Expense* e, int new_day) {

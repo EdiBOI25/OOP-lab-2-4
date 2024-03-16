@@ -89,8 +89,10 @@ void test_all() {
 	service_delete_expense(serv, 5);
 	assert(list[5]->day == 7);
 
-	service_filter_by_type(serv, "altele");
-	service_filter_by_type(serv, "mancare");
+	service_filter(serv, "day", 8);
+	service_filter(serv, "amount", 200);
+	service_filter(serv, "type", "altele");
+	service_filter(serv, "random", "blabla");
 
 	service_set_amount(serv, 1, 49572);
 	service_set_amount(serv, 9, 49572);
