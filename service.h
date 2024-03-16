@@ -64,8 +64,9 @@ void service_delete_expense(Service* serv, int position);
  * \param serv the service in use
  * \param parameter the parameter to filter by (must be day, amount or type)
  * \param key the key to filter by (ex: 30, 2000, food)
+ * \return list with filtered expenses
  */
-void service_filter(Service* serv, char* parameter, void* key);
+DynamicArray* service_filter(Service* serv, char* parameter, void* key);
 
 /**
  * \brief Sorts and prints the expenses by amount

@@ -94,9 +94,9 @@ int compare(const void* el1, const void* el2, int (*method)(const void* a, const
 	return method(el1, el2);
 }
 
-void service_filter(Service* serv, char* parameter, void* key) {
+DynamicArray* service_filter(Service* serv, char* parameter, void* key) {
 	if (serv == NULL || parameter == NULL || key == NULL) {
-		return;
+		return NULL;
 	}
 	void* (*getter)(void* to_get); // pointers to functions
 	int (*compare_method)(const void* a, const void* b);
@@ -114,15 +114,18 @@ void service_filter(Service* serv, char* parameter, void* key) {
 		compare_method = compare_string;
 	}
 	else {
-		return;
+		return NULL;
 	}
+
+	DynamicArray* filtered_array = array_construct(serv->list->capacity);
 
 	for(int i = 0; i < serv->list->length; ++i) {
 		if((*compare_method)((*getter)(serv->list->expenses[i]), key)) {
-			print_expense(serv->list->expenses[i]);
+			array_add_expense(filtered_array, expense_deep_copy(serv->list->expenses[i]));
 		}
 	}
-	
+
+	return filtered_array;
 }
 
 void service_sort_by_amount(Service* serv, int reverse) {

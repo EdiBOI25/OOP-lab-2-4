@@ -65,3 +65,9 @@ void array_delete_expense(DynamicArray* array, int position);
  * \return deep copy of source_array
  */
 DynamicArray* array_deep_copy(DynamicArray* source_array);
+
+/**
+ * \brief Prints all expenses of an array
+ * \param array the array to print
+ */
+void array_print(DynamicArray* array);

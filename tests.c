@@ -17,10 +17,6 @@ void test_all() {
 	assert(e1->amount == 300);
 	assert(strcmp(e1->type, "mancare") == 0);
 	assert(expense_is_valid(e1));
-	assert(expense_is_valid(expense_construct(32, 10, "asd")) == 0);
-	assert(expense_is_valid(expense_construct(15, -100, "asdasd")) == 0);
-	assert(expense_is_valid(expense_construct(15, 100, "as")) == 0);
-	assert(expense_is_valid(expense_construct(-5, 100, "as")) == 0);
 
 	expense_set_day(e1, 20);
 	assert(e1->day = 20);
@@ -30,12 +26,23 @@ void test_all() {
 	assert(strcmp(e1->type, "qwerty") == 0);
 
 	Expense* copy_exp = expense_deep_copy(e1);
-	assert(e1->day == 20);
-	assert(e1->amount == 200000);
-	assert(strcmp(e1->type, "qwerty") == 0);
+	assert(copy_exp->day == 20);
+	assert(copy_exp->amount == 200000);
+	assert(strcmp(copy_exp->type, "qwerty") == 0);
+	expense_destruct(copy_exp);
 
 	print_expense(e1);
 	expense_destruct(e1);
+
+	Expense* ee = expense_construct(32, 10, "asd");
+	assert(expense_is_valid(ee) == 0);
+	expense_destruct(ee);
+	ee = expense_construct(15, -100, "asdasd");
+	assert(expense_is_valid(ee) == 0);
+	expense_destruct(ee);
+	ee = expense_construct(15, 100, "as");
+	assert(expense_is_valid(ee) == 0);
+	expense_destruct(ee);
 
 	// test dynamic array
 	DynamicArray* dynamic_array = array_construct(2);
@@ -59,6 +66,7 @@ void test_all() {
 	assert(copy_array->length == 9);
 	assert(copy_array->capacity == 16);
 	assert(array_get_expense(copy_array, 5)->day == 6);
+	array_destruct(copy_array);
 
 	array_destruct(dynamic_array);
 	
@@ -89,10 +97,19 @@ void test_all() {
 	service_delete_expense(serv, 5);
 	assert(list[5]->day == 7);
 
-	service_filter(serv, "day", 8);
-	service_filter(serv, "amount", 200);
-	service_filter(serv, "type", "altele");
-	service_filter(serv, "random", "blabla");
+	DynamicArray* filter_array = service_filter(serv, "day", 8);
+	array_print(filter_array);
+	array_destruct(filter_array);
+
+	filter_array = service_filter(serv, "amount", 200);
+	array_print(filter_array);
+	array_destruct(filter_array);
+	filter_array = service_filter(serv, "type", "altele");
+	array_print(filter_array);
+	array_destruct(filter_array);
+	filter_array = service_filter(serv, "random", "blabla");
+	array_print(filter_array);
+	array_destruct(filter_array);
 
 	service_set_amount(serv, 1, 49572);
 	service_set_amount(serv, 9, 49572);

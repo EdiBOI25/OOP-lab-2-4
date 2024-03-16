@@ -1,5 +1,6 @@
 ﻿#include "dynamic_array.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 
@@ -95,3 +96,12 @@ void array_delete_expense(DynamicArray* array, int position) {
 	array->length--;
 }
 
+void array_print(DynamicArray* array) {
+	if (array == NULL) {
+		return;
+	}
+	for(int i = 0; i < array->length; ++i) {
+		printf("%d: ", i);
+		print_expense(array->expenses[i]);
+	}
+}

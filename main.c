@@ -5,8 +5,6 @@
 #include "service.h"
 #include "UI.h"
 #include "./tests.h"
-// TODO: void* pointer to functions + repository print all pt dyn array
-// TODO 2: refa sort astfel incat sa returneze lista noua (deep copy, free la lista dupa)
 
 int main() {
 	test_all();

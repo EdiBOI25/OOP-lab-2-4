@@ -145,19 +145,25 @@ void ui_filter_expense(UI* ui) {
 		int day;
 		printf("Enter value for day: ");
 		scanf("%d", &day);
-		printf("Filtering by day...\n");
+		DynamicArray* filtered_list = service_filter(ui->service, filter, day);
+		array_print(filtered_list);
+		array_destruct(filtered_list);
 	}
 	else if (strcmp(filter, "amount") == 0) {
 		int amount;
-		printf("Enter new for amount: ");
+		printf("Enter value for amount: ");
 		scanf("%d", &amount);
-		printf("Filtering by amount...\n");
+		DynamicArray* filtered_list = service_filter(ui->service, filter, amount);
+		array_print(filtered_list);
+		array_destruct(filtered_list);
 	}
 	else if (strcmp(filter, "type") == 0) {
 		char* type[50];
 		printf("Enter value for type: ");
 		scanf("%s", type);
-		service_filter(ui->service, filter, type);
+		DynamicArray* filtered_list = service_filter(ui->service, filter, type);
+		array_print(filtered_list);
+		array_destruct(filtered_list);
 	}
 	else {
 		printf("Invalid filter.\n");
