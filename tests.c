@@ -47,6 +47,7 @@ void test_all() {
 	// test dynamic array
 	DynamicArray* dynamic_array = array_construct(2);
 	assert(dynamic_array->capacity == 2);
+	assert(dynamic_array->length == 0);
 	for (int i = 0; i < 10; i++) {
 		Expense* e = expense_construct(i, i * 100, "mancare");
 		array_add_expense(dynamic_array, e);

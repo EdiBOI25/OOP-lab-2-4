@@ -26,6 +26,7 @@ void service_destruct(Service* service) {
 void service_add_expense(Service* service, int day, int amount, char* type) {
 	Expense* expense = expense_construct(day, amount, type);
 	if (expense_is_valid(expense) == 0) {
+		expense_destruct(expense);
 		return;
 	}
 	array_add_expense(service->list, expense);
