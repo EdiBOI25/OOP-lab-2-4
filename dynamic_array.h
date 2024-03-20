@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "expense.h"
 
+typedef int (*compare_method)(const Expense* a, const Expense* b);
+
 /**
  * \brief Dynamic array of expenses
  */

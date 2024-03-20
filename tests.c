@@ -19,9 +19,9 @@ void test_all() {
 	assert(expense_is_valid(e1));
 
 	expense_set_day(e1, 20);
-	assert(e1->day = 20);
+	assert(e1->day == 20);
 	expense_set_amount(e1, 200000);
-	assert(e1->amount = 200000);
+	assert(e1->amount == 200000);
 	expense_set_type(e1, "qwerty");
 	assert(strcmp(e1->type, "qwerty") == 0);
 
@@ -100,27 +100,42 @@ void test_all() {
 	service_delete_expense(serv, 5);
 	assert(list[5]->day == 7);
 
-	DynamicArray* filter_array = service_filter(serv, "day", 8);
+	DynamicArray* filter_array = filter_by_day(serv->list, 8);
 	array_print(filter_array);
 	array_destruct(filter_array);
 
-	filter_array = service_filter(serv, "amount", 200);
+	filter_array = filter_by_amount(serv->list, 200);
 	array_print(filter_array);
 	array_destruct(filter_array);
-	filter_array = service_filter(serv, "type", "altele");
+	filter_array = filter_by_type(serv->list, "altele");
 	array_print(filter_array);
 	array_destruct(filter_array);
-	filter_array = service_filter(serv, "random", "blabla");
+	/*filter_array = service_filter(serv, "random", "blabla");
 	array_print(filter_array);
-	array_destruct(filter_array);
+	array_destruct(filter_array);*/
 
 	service_set_amount(serv, 1, 49572);
 	service_set_amount(serv, 9, 49572);
 
-	service_sort_by_amount(serv, 0);
+
+	printf("\n\nSORTS:\n");
+	DynamicArray* sorted_array = service_sort(serv, "amount", 0);
+	array_print(sorted_array);
+	array_destruct(sorted_array);
+	sorted_array = service_sort(serv, "amount", 1);
+	array_print(sorted_array);
+	array_destruct(sorted_array);
+	sorted_array = service_sort(serv, "type", 0);
+	array_print(sorted_array);
+	array_destruct(sorted_array);
+	sorted_array = service_sort(serv, "type", 1);
+	array_print(sorted_array);
+	array_destruct(sorted_array);
+
+	/*service_sort_by_amount(serv, 0);
 	service_sort_by_amount(serv, 1);
 	service_sort_by_type(serv, 1);
-	service_sort_by_type(serv, 0);
+	service_sort_by_type(serv, 0);*/
 
 	service_destruct(serv);
 	array_destruct(dynamic_array);

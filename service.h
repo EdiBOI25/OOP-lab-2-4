@@ -81,3 +81,17 @@ void service_sort_by_amount(Service* serv, int reverse);
  * \param reverse 1 if sorting should be in reverse order, 0 if contrary
  */
 void service_sort_by_type(Service* serv, int reverse);
+
+/**
+ * \brief Sorts the array of a service
+ * \param serv the service in use
+ * \param parameter the parameter to sort by (day, amount or type)
+ * \param reverse if sorting should be reversed or not (0 or 1)
+ * \return sorted array
+ */
+DynamicArray* service_sort(Service* serv, char* parameter, int reverse);
+void sort(DynamicArray* da, compare_method cmp, int reverse);
+
+DynamicArray* filter_by_type(DynamicArray* source_array, char* type);
+DynamicArray* filter_by_amount(DynamicArray* source_array, int amount);
+DynamicArray* filter_by_day(DynamicArray* source_array, int day);

@@ -6,6 +6,10 @@
 #include "UI.h"
 #include "./tests.h"
 
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 int main() {
 	test_all();
 	//Repository* repo = repository_construct();
@@ -16,8 +20,10 @@ int main() {
 
 	ui_destruct(ui);
 	service_destruct(serv);
-	//repository_destruct(repo);
 	array_destruct(list);
+	//repository_destruct(repo);
+
+	_CrtDumpMemoryLeaks();
 	
 	return 0;
 }

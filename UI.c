@@ -115,7 +115,7 @@ void ui_edit_expense(UI* ui) {
 		service_set_amount(ui->service, position, amount);
 	}
 	else if (strcmp(param, "type") == 0) {
-		char* type[50];
+		char type[50];
 		printf("Enter new value for type: ");
 		scanf("%s", type);
 		service_set_type(ui->service, position, type);
@@ -138,14 +138,14 @@ void ui_delete_expense(UI* ui) {
 }
 
 void ui_filter_expense(UI* ui) {
-	char* filter[50];
+	char filter[50];
 	printf("Choose the parameter you want to filter by (day/amount/type): ");
 	scanf("%s", filter);
 	if (strcmp(filter, "day") == 0) {
 		int day;
 		printf("Enter value for day: ");
 		scanf("%d", &day);
-		DynamicArray* filtered_list = service_filter(ui->service, filter, day);
+		DynamicArray* filtered_list = filter_by_day(ui->service->list, day);
 		array_print(filtered_list);
 		array_destruct(filtered_list);
 	}
@@ -153,15 +153,15 @@ void ui_filter_expense(UI* ui) {
 		int amount;
 		printf("Enter value for amount: ");
 		scanf("%d", &amount);
-		DynamicArray* filtered_list = service_filter(ui->service, filter, amount);
+		DynamicArray* filtered_list = filter_by_amount(ui->service->list, amount);
 		array_print(filtered_list);
 		array_destruct(filtered_list);
 	}
 	else if (strcmp(filter, "type") == 0) {
-		char* type[50];
+		char type[50];
 		printf("Enter value for type: ");
 		scanf("%s", type);
-		DynamicArray* filtered_list = service_filter(ui->service, filter, type);
+		DynamicArray* filtered_list = filter_by_type(ui->service->list, type);
 		array_print(filtered_list);
 		array_destruct(filtered_list);
 	}
@@ -172,7 +172,7 @@ void ui_filter_expense(UI* ui) {
 
 void ui_sort_expense(UI* ui) {
 	printf("Choose parameter to sort by (amount/type): ");
-	char* param[50];
+	char param[50];
 	scanf("%s", param);
 	printf("Choose if sorting should be in reverse order (1 or 0): ");
 	int reverse;

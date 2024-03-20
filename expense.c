@@ -82,6 +82,9 @@ void expense_set_type(Expense* e, char* new_type) {
 	}
 	free(e->type);
 	e->type = malloc((strlen(new_type) + 1));
+	if(e->type == NULL) {
+		return;
+	}
 	strcpy(e->type, new_type);
 }
 

@@ -49,6 +49,9 @@ void array_add_expense(DynamicArray* array, Expense* e) {
 void array_resize(DynamicArray* array) {
 	int new_capacity = array->capacity * 2;
 	Expense** new_expenses = malloc(new_capacity * sizeof(Expense));
+	if (new_expenses == NULL) {
+		return;
+	}
 	for (int i = 0; i < array->length; ++i) {
 		new_expenses[i] = array->expenses[i];
 	}
