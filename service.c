@@ -86,19 +86,19 @@ void service_delete_expense(Service* serv, int position) {
 	array_delete_expense(serv->list, position);
 }
 
-int compare_int(int* a, int* b) {
-	if (a == b) {
-		return 0;
-	}
-	if (a > b) {
-		return 1;
-	}
-	return -1;
-}
-
-int compare_string(char* a, char* b) {
-	return strcmp(a, b);
-}
+//int compare_int(int* a, int* b) {
+//	if (a == b) {
+//		return 0;
+//	}
+//	if (a > b) {
+//		return 1;
+//	}
+//	return -1;
+//}
+//
+//int compare_string(char* a, char* b) {
+//	return strcmp(a, b);
+//}
 
 int compare_type(const Expense* e1, const Expense* e2) {
 	if (e1 == NULL || e2 == NULL) {
@@ -150,7 +150,7 @@ DynamicArray* filter_by_type(DynamicArray* source_array, char* type) {
 	DynamicArray* filtered_array = array_construct(source_array->capacity);
 
 	for (int i = 0; i < source_array->length; ++i) {
-		if ((source_array->expenses[i]->type, type) == 0) {
+		if (strcmp(source_array->expenses[i]->type, type) == 0) {
 			array_add_expense(filtered_array, expense_deep_copy(source_array->expenses[i]));
 		}
 	}
@@ -220,102 +220,91 @@ void sort(DynamicArray* da, compare_method cmp, int reverse) {
 		for (int j = i + 1; j < da->length; ++j) {
 			if (reverse == 0) {
 				if (cmp(da->expenses[i], da->expenses[j])>0) {
-					printf("BEFORE SWAP:\n");
-					print_expense(da->expenses[i]);
-					print_expense(da->expenses[j]);
 					Expense* aux = da->expenses[i];
 					da->expenses[i] = da->expenses[j];
 					da->expenses[j] = aux;
-					printf("AFTER SWAP:\n");
-					print_expense(da->expenses[i]);
-					print_expense(da->expenses[j]);
 				}
 			}
 			else {
 				if (cmp(da->expenses[i], da->expenses[j]) < 0) {
-					printf("BEFORE SWAP:\n");
-					print_expense(da->expenses[i]);
-					print_expense(da->expenses[j]);
 					Expense* aux = da->expenses[i];
 					da->expenses[i] = da->expenses[j];
 					da->expenses[j] = aux;
 					printf("AFTER SWAP:\n");
-					print_expense(da->expenses[i]);
-					print_expense(da->expenses[j]);
 				}
 			}
 		}
 	}
 	
 }
-void service_sort_by_amount(Service* serv, int reverse) {
-	int len = serv->list->length;
-	Expense** sorted_list = (Expense**)malloc(len * sizeof(Expense*));
-	if (sorted_list == NULL) {
-		return;
-	}
-	for (int i = 0; i < len; ++i) {
-		sorted_list[i] = serv->list->expenses[i];
-	}
-
-	for (int i = 0; i < len - 1; ++i) {
-		for (int j = i + 1; j < len; ++j) {
-			if (reverse) {
-				if(sorted_list[i]->amount < sorted_list[j]->amount) {
-					Expense* aux = sorted_list[i];
-					sorted_list[i] = sorted_list[j];
-					sorted_list[j] = aux;
-				}
-			}
-			else {
-				if (sorted_list[i]->amount > sorted_list[j]->amount) {
-					Expense* aux = sorted_list[i];
-					sorted_list[i] = sorted_list[j];
-					sorted_list[j] = aux;
-				}
-			}
-		}
-	}
-
-	for (int i = 0; i < len; ++i) {
-		print_expense(sorted_list[i]);
-	}
-
-	free(sorted_list);
-}
-
-void service_sort_by_type(Service* serv, int reverse) {
-	int len = serv->list->length;
-	Expense** sorted_list = (Expense**)malloc(len * sizeof(Expense*));
-	if (sorted_list == NULL) {
-		return;
-	}
-	for (int i = 0; i < len; ++i) {
-		sorted_list[i] = serv->list->expenses[i];
-	}
-
-	for (int i = 0; i < len - 1; ++i) {
-		for (int j = i + 1; j < len; ++j) {
-			if (reverse) {
-				if (strcmp(sorted_list[i]->type, sorted_list[j]->type) < 0) {
-					Expense* aux = sorted_list[i];
-					sorted_list[i] = sorted_list[j];
-					sorted_list[j] = aux;
-				}
-			}
-			else {
-				if (strcmp(sorted_list[i]->type, sorted_list[j]->type) > 0) {
-					Expense* aux = sorted_list[i];
-					sorted_list[i] = sorted_list[j];
-					sorted_list[j] = aux;
-				}
-			}
-		}
-	}
-
-	for (int i = 0; i < len; ++i) {
-		print_expense(sorted_list[i]);
-	}
-
-	free(sorted_list);
-}
+//void service_sort_by_amount(Service* serv, int reverse) {
+//	int len = serv->list->length;
+//	Expense** sorted_list = (Expense**)malloc(len * sizeof(Expense*));
+//	if (sorted_list == NULL) {
+//		return;
+//	}
+//	for (int i = 0; i < len; ++i) {
+//		sorted_list[i] = serv->list->expenses[i];
+//	}
+//
+//	for (int i = 0; i < len - 1; ++i) {
+//		for (int j = i + 1; j < len; ++j) {
+//			if (reverse) {
+//				if(sorted_list[i]->amount < sorted_list[j]->amount) {
+//					Expense* aux = sorted_list[i];
+//					sorted_list[i] = sorted_list[j];
+//					sorted_list[j] = aux;
+//				}
+//			}
+//			else {
+//				if (sorted_list[i]->amount > sorted_list[j]->amount) {
+//					Expense* aux = sorted_list[i];
+//					sorted_list[i] = sorted_list[j];
+//					sorted_list[j] = aux;
+//				}
+//			}
+//		}
+//	}
+//
+//	for (int i = 0; i < len; ++i) {
+//		print_expense(sorted_list[i]);
+//	}
+//
+//	free(sorted_list);
+//}
+//
+//void service_sort_by_type(Service* serv, int reverse) {
+//	int len = serv->list->length;
+//	Expense** sorted_list = (Expense**)malloc(len * sizeof(Expense*));
+//	if (sorted_list == NULL) {
+//		return;
+//	}
+//	for (int i = 0; i < len; ++i) {
+//		sorted_list[i] = serv->list->expenses[i];
+//	}
+//
+//	for (int i = 0; i < len - 1; ++i) {
+//		for (int j = i + 1; j < len; ++j) {
+//			if (reverse) {
+//				if (strcmp(sorted_list[i]->type, sorted_list[j]->type) < 0) {
+//					Expense* aux = sorted_list[i];
+//					sorted_list[i] = sorted_list[j];
+//					sorted_list[j] = aux;
+//				}
+//			}
+//			else {
+//				if (strcmp(sorted_list[i]->type, sorted_list[j]->type) > 0) {
+//					Expense* aux = sorted_list[i];
+//					sorted_list[i] = sorted_list[j];
+//					sorted_list[j] = aux;
+//				}
+//			}
+//		}
+//	}
+//
+//	for (int i = 0; i < len; ++i) {
+//		print_expense(sorted_list[i]);
+//	}
+//
+//	free(sorted_list);
+//}

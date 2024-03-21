@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-Expense* expense_construct(int day, int amount, char* type) {
+Expense* expense_construct(const int day, const int amount, const char* type) {
 	Expense* e = malloc(sizeof(Expense));
 	if (e == NULL) {
 		return NULL;
@@ -29,7 +29,7 @@ void expense_destruct(Expense *e) {
 	free(e);
 }
 
-void print_expense(Expense* e) {
+void print_expense(const Expense* e) {
 	if(e == NULL) {
 		return;
 	}
@@ -37,7 +37,7 @@ void print_expense(Expense* e) {
 		e->day, e->amount, e->type);
 }
 
-int expense_is_valid(Expense* e) {
+int expense_is_valid(const Expense* e) {
 	if (e->day < 1 || e->day > 31) {
 		printf("Invalid day: must be between 1 and 31.\n");
 		return 0;
@@ -56,27 +56,15 @@ int expense_is_valid(Expense* e) {
 	return 1;
 }
 
-int expense_get_day(Expense* e) {
-	return e->day;
-}
-
-int expense_get_amount(Expense* e) {
-	return e->amount;
-}
-
-char* expense_get_type(Expense* e) {
-	return e->type;
-}
-
-void expense_set_day(Expense* e, int new_day) {
+void expense_set_day(Expense* e, const int new_day) {
 	e->day = new_day;
 }
 
-void expense_set_amount(Expense* e, int new_amount) {
+void expense_set_amount(Expense* e, const int new_amount) {
 	e->amount = new_amount;
 }
 
-void expense_set_type(Expense* e, char* new_type) {
+void expense_set_type(Expense* e, const char* new_type) {
 	if (new_type == NULL) {
 		return;
 	}
@@ -88,6 +76,6 @@ void expense_set_type(Expense* e, char* new_type) {
 	strcpy(e->type, new_type);
 }
 
-Expense* expense_deep_copy(Expense* source_expense) {
+Expense* expense_deep_copy(const Expense* source_expense) {
 	return expense_construct(source_expense->day, source_expense->amount, source_expense->type);
 }

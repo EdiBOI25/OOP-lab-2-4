@@ -1,6 +1,10 @@
 ﻿#pragma once
 #include "expense.h"
 
+/**
+ * \brief Method that compares 2 expenses by a given parameter
+ * \return 0 if a.field == b.field, positive int if a>b, negative int otherwise
+ */
 typedef int (*compare_method)(const Expense* a, const Expense* b);
 
 /**
@@ -17,7 +21,7 @@ typedef struct {
  * \param capacity the capacity of the array to be initialised with
  * \return empty dynamic array
  */
-DynamicArray* array_construct(int capacity);
+DynamicArray* array_construct(const int capacity);
 
 /**
  * \brief Frees the allocated memory of given dynamic array
@@ -45,7 +49,7 @@ void array_resize(DynamicArray* array);
  * \param position the position to search for
  * \return expense at given position | NULL if not found
  */
-Expense* array_get_expense(DynamicArray* array, int position);
+Expense* array_get_expense(const DynamicArray* array, const int position);
 
 /**
  * \brief Returns the list of expenses
@@ -66,7 +70,7 @@ void array_delete_expense(DynamicArray* array, int position);
  * \param source_array the array whose contents will be copied
  * \return deep copy of source_array
  */
-DynamicArray* array_deep_copy(DynamicArray* source_array);
+DynamicArray* array_deep_copy(const DynamicArray* source_array);
 
 /**
  * \brief Prints all expenses of an array

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 
-DynamicArray* array_construct(int capacity) {
+DynamicArray* array_construct(const int capacity) {
 	DynamicArray* array = malloc(sizeof(DynamicArray));
 	if(array == NULL) {
 		return NULL;
@@ -47,7 +47,7 @@ void array_add_expense(DynamicArray* array, Expense* e) {
 }
 
 void array_resize(DynamicArray* array) {
-	int new_capacity = array->capacity * 2;
+	const int new_capacity = array->capacity * 2;
 	Expense** new_expenses = malloc(new_capacity * sizeof(Expense));
 	if (new_expenses == NULL) {
 		return;
@@ -60,7 +60,7 @@ void array_resize(DynamicArray* array) {
 	array->expenses = new_expenses;
 }
 
-DynamicArray* array_deep_copy(DynamicArray* source_array) {
+DynamicArray* array_deep_copy(const DynamicArray* source_array) {
 	DynamicArray* destination_array = array_construct(source_array->capacity);
 
 	if (destination_array == NULL || source_array == NULL) {
@@ -74,7 +74,7 @@ DynamicArray* array_deep_copy(DynamicArray* source_array) {
 	return destination_array;
 }
 
-Expense* array_get_expense(DynamicArray* array, int position) {
+Expense* array_get_expense(const DynamicArray* array, const int position) {
 	if (position < 0 || position > array->length) {
 		return NULL;
 	}

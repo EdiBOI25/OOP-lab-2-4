@@ -177,7 +177,14 @@ void ui_sort_expense(UI* ui) {
 	printf("Choose if sorting should be in reverse order (1 or 0): ");
 	int reverse;
 	scanf("%d", &reverse);
-	if (strcmp(param, "amount") == 0) {
+	DynamicArray* sorted_array = service_sort(ui->service, param, reverse);
+	if (sorted_array) {
+		array_print(sorted_array);
+		array_destruct(sorted_array);
+		return;
+	}
+	printf("Invalid parameter or array is empty.\n");
+	/*if (strcmp(param, "amount") == 0) {
 		service_sort_by_amount(ui->service, reverse);
 	}
 	else if (strcmp(param, "type") == 0) {
@@ -185,5 +192,5 @@ void ui_sort_expense(UI* ui) {
 	}
 	else {
 		printf("Invalid parameter.\n");
-	}
+	}*/
 }

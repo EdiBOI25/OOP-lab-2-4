@@ -59,14 +59,14 @@ void service_set_type(Service* serv, int position, char* new_type);
  */
 void service_delete_expense(Service* serv, int position);
 
-/**
- * \brief Filters and prints expenses which match the given parameters
- * \param serv the service in use
- * \param parameter the parameter to filter by (must be day, amount or type)
- * \param key the key to filter by (ex: 30, 2000, food)
- * \return list with filtered expenses
- */
-DynamicArray* service_filter(Service* serv, char* parameter, void* key);
+///**
+// * \brief Filters and prints expenses which match the given parameters
+// * \param serv the service in use
+// * \param parameter the parameter to filter by (must be day, amount or type)
+// * \param key the key to filter by (ex: 30, 2000, food)
+// * \return list with filtered expenses
+// */
+//DynamicArray* service_filter(Service* serv, char* parameter, void* key);
 
 /**
  * \brief Sorts and prints the expenses by amount
@@ -83,15 +83,39 @@ void service_sort_by_amount(Service* serv, int reverse);
 void service_sort_by_type(Service* serv, int reverse);
 
 /**
- * \brief Sorts the array of a service
+ * \brief Sorts and returns the array of a service
  * \param serv the service in use
  * \param parameter the parameter to sort by (day, amount or type)
  * \param reverse if sorting should be reversed or not (0 or 1)
  * \return sorted array
  */
 DynamicArray* service_sort(Service* serv, char* parameter, int reverse);
+/**
+ * \brief Sorts given array
+ * \param da Array to sort
+ * \param cmp comparing method
+ * \param reverse 0 or 1 if sorting should be reversed
+ */
 void sort(DynamicArray* da, compare_method cmp, int reverse);
 
+/**
+ * \brief Filters an array based on expense type
+ * \param source_array array to filter
+ * \param type expense type to filter by
+ * \return filtered array
+ */
 DynamicArray* filter_by_type(DynamicArray* source_array, char* type);
+/**
+ * \brief filters an array based on expense amount
+ * \param source_array array to filter
+ * \param amount the amount to filter by
+ * \return filtered array
+ */
 DynamicArray* filter_by_amount(DynamicArray* source_array, int amount);
+/**
+ * \brief filters an array based on expense day
+ * \param source_array array to filter
+ * \param day the day to filter by
+ * \return filtered array
+ */
 DynamicArray* filter_by_day(DynamicArray* source_array, int day);
